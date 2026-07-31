@@ -28,7 +28,10 @@
   <p>
     Every click on "Increment store counter" writes <code>state.clicks + 1</code> to the store
     and the component above re-renders immediately. That's what happens on
-    <code>@stencil/core</code> 4.32.0 and older (<code>npm i -D @stencil/core@4.32.0 && npm run build</code> to check).
+    <code>@stencil/core</code> 4.32.0 and older &mdash; the
+    <a href="https://github.com/CalinaCristian/stencil-store-globalscript-repro/tree/works-on-4.32">works-on-4.32</a>
+    branch of this repo is this exact code pinned to 4.32.0:
+    <code>git checkout works-on-4.32 &amp;&amp; npm install &amp;&amp; npm run build</code>.
   </p>
 
   <h2>Actual on @stencil/core &gt;= 4.33.0</h2>

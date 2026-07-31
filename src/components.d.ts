@@ -31,20 +31,15 @@ declare namespace LocalJSX {
          */
         "tick"?: number;
     }
-
-    interface MyCounterAttributes {
-        "tick": number;
-    }
-
     interface IntrinsicElements {
-        "my-counter": Omit<MyCounter, keyof MyCounterAttributes> & { [K in keyof MyCounter & keyof MyCounterAttributes]?: MyCounter[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `attr:${K}`]?: MyCounterAttributes[K] } & { [K in keyof MyCounter & keyof MyCounterAttributes as `prop:${K}`]?: MyCounter[K] };
+        "my-counter": MyCounter;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-counter": LocalJSX.IntrinsicElements["my-counter"] & JSXBase.HTMLAttributes<HTMLMyCounterElement>;
+            "my-counter": LocalJSX.MyCounter & JSXBase.HTMLAttributes<HTMLMyCounterElement>;
         }
     }
 }

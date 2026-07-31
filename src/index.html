@@ -31,11 +31,13 @@
     <code>@stencil/core</code> 4.32.0 and older (<code>npm i -D @stencil/core@4.32.0 && npm run build</code> to check).
   </p>
 
-  <h2>Actual on @stencil/core &gt;= 4.33.0</h2>
+  <h2>This branch</h2>
   <p>
-    The counter stays at 0 no matter how many times you click. The store <em>is</em> updating:
-    click "Force unrelated re-render" and the counter jumps to the real value. The renderer
-    subscription was silently dropped at <code>createStore()</code> time — everything else works.
+    This is the <code>works-on-4.32</code> branch: the same code with <code>@stencil/core</code>
+    pinned to 4.32.0, the last version where this works. The counter should update on every click.
+    Switch to <a href="https://github.com/CalinaCristian/stencil-store-globalscript-repro">master</a>
+    (pinned to 4.43.5) to see the bug: the counter stays at 0 there until you force an unrelated
+    re-render with the second button.
   </p>
 
   <script>

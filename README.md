@@ -7,9 +7,9 @@ Since Stencil 4.33.0 the client runtime imports globalStyles from the generated 
 1. `npm install && npm run build`
 2. serve the `www/` folder (e.g. `npx serve www`) and open it
 3. the label shows "ready", proving the globalScript ran
-4. in the console run `document.dispatchEvent(new Event('bump'))` — the counter stays at 0
-5. run `document.querySelector('my-counter').tick = 1` — the counter jumps to the real value, proving the store updated but no re-render happened
-6. `npm i -D @stencil/core@4.32.0 && npm run build`, repeat steps 2-4: the counter now updates immediately
+4. click **"Increment store counter"** a few times — the counter stays at 0
+5. click **"Force unrelated re-render"** — the counter jumps to the number of times you actually clicked, proving the store updated but no re-render happened on the store writes
+6. `npm i -D @stencil/core@4.32.0 && npm run build`, hard-reload: the counter now updates on every click
 
 ## Versions
 

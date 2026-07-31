@@ -1,3 +1,47 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><script type="module" src="/build/minrepro.esm.js"></script></head>
-<body><my-counter></my-counter></body></html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>stencil store globalScript repro</title>
+  <script type="module" src="/build/minrepro.esm.js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 42em; margin: 2em auto; line-height: 1.5; padding: 0 1em; }
+    my-counter { display: block; padding: 1em; border: 2px solid #888; margin: 1em 0; font-size: 1.4em; }
+    button { font-size: 1em; padding: .4em .8em; margin-right: .5em; }
+    code { background: #eee; padding: 0 .3em; }
+  </style>
+</head>
+<body>
+  <h1>@stencil/store + globalScript repro</h1>
+  <p>
+    The component below renders <code>state.label</code> and <code>state.clicks</code> from a
+    @stencil/store store created at module scope. The globalScript imports that store —
+    the label reading <b>ready</b> proves the globalScript ran.
+  </p>
+
+  <my-counter></my-counter>
+
+  <button id="bump">Increment store counter</button>
+  <button id="force">Force unrelated re-render (sets a prop)</button>
+
+  <h2>Expected</h2>
+  <p>
+    Every click on "Increment store counter" writes <code>state.clicks + 1</code> to the store
+    and the component above re-renders immediately. That's what happens on
+    <code>@stencil/core</code> 4.32.0 and older (<code>npm i -D @stencil/core@4.32.0 && npm run build</code> to check).
+  </p>
+
+  <h2>Actual on @stencil/core &gt;= 4.33.0</h2>
+  <p>
+    The counter stays at 0 no matter how many times you click. The store <em>is</em> updating:
+    click "Force unrelated re-render" and the counter jumps to the real value. The renderer
+    subscription was silently dropped at <code>createStore()</code> time — everything else works.
+  </p>
+
+  <script>
+    document.getElementById('bump').addEventListener('click', () => document.dispatchEvent(new Event('bump')));
+    let t = 0;
+    document.getElementById('force').addEventListener('click', () => { document.querySelector('my-counter').tick = ++t; });
+  </script>
+</body>
+</html>

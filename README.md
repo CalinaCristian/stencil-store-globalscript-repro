@@ -13,4 +13,10 @@ Since Stencil 4.33.0 the client runtime imports globalStyles from the generated 
 
 ## Versions
 
-Broken on 4.33.0 through 4.43.5 (latest at time of writing). Works on 4.32.0 and older. The import is gone again in the 5.0.0 alphas.
+Broken on 4.33.0 through 4.43.5 (latest at the time of writing). Works on 4.32.0 and older — the [`works-on-4.32`](../../tree/works-on-4.32) branch of this repo is identical except `@stencil/core` is pinned to 4.32.0, so you can compare directly:
+
+```
+git checkout works-on-4.32 && npm install && npm run build
+```
+
+The import that causes this is gone again in the 5.0.0 alphas.
